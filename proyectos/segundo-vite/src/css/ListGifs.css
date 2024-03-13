@@ -1,0 +1,33 @@
+.list-gifs {
+    min-width: 340px;
+    max-width: 500px;
+
+    color: aqua;
+    background-color: brown;
+    border-radius: 8px;
+}
+
+.lg-conte-imgs {
+    max-height: 300px;
+}
+
+.list-gifs img {
+    object-fit: cover;
+    width: 340px;
+    height: 300px;
+    overflow-x: hidden;
+    border: 2px solid #fff;
+    border-radius: 3px;
+}
+
+.lg-btn-swtich-gif {
+    /* min-width: 100%; */
+    order: 2;
+}
+
+.lg-btn-switches {
+    display: flex;
+    place-content: center;
+    gap: 30px;
+    padding: 10px 0;
+}

@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+.body {
+    height: 100vh;
+    overflow-x: hidden;
+    display: grid;
+    place-content: center;
+    gap: 15px;
+    background-color: #222;
+}
+
+.card {
+    width: 300px;
+    height: auto;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    color: #FFF;
+    border-radius: 10px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.card img {
+    object-fit: cover;
+    width: 60px;
+    height: 60px;
+    border-radius: 40px;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 120px;
+
+}
+
+.card-info strong {
+    font-family: 'Segoe UI';
+}
+
+.card-info span {
+    text-align: start;
+}
+
+.followCardButton {
+    height: 30px;
+    padding: 0 5px;
+    border-radius: 19px;
+    color: #FFF;
+    font-weight: bolder;
+    background: #666;
+    font-family: 'Segoe UI';
+    border: solid 1px #1f1c1c;
+    transition: all .2s ease;
+}
+
+.followCardButton:hover {
+    opacity: .7;
+}
+
+.followCard-text {
+    display: block;
+}
+
+.stopFollowing {
+    display: none;
+}
+
+.followCardButton.isFollowing {
+    background-color: transparent;
+    color: #fff;
+    border: solid 1px #7e8380;
+    /* padding: 0 8.5px 0 10px; */
+    width: 110px;
+}
+
+
+
+.followCardButton.isFollowing:hover {
+    background-color: rgba(202, 41, 41, 0.205);
+    border: .5px solid rgba(238, 83, 83, 0.712);
+    color: rgb(255, 0, 0);
+}
+
+.followCardButton.isFollowing:hover .stopFollowing {
+    display: block;
+}
+
+.followCardButton.isFollowing:hover .followCard-text {
+    display: none;
+}
+
+/* .isfollowing:hover::after {
+    content: '❌';
+} */

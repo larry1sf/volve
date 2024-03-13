@@ -1,0 +1,291 @@
+en el archivo de inicializacion 
+
+importamos react dom,los files de css o file de componentes jsx a utilizar
+
+y renderizamos la app con los componentes.
+----------------------------------------------------------------------------------
+        CREACION DE PLANTILLA DE ELEMENTOS.
+
+en el archivo del componente
+
+importamos la plantilla para modificar uno por uno
+
+
+----------------------------------------------------------------------------------
+
+        MODIFICACION DE PLANTILLA DE ELEMENTOS.
+
+los componentes utilizados exportan un componente
+
+con propiedades que se cambian al importar el objeto
+
+muestra en console si es following
+
+retorna un elemento con propiedades para cambiarlo y modificarlo dependiendo.
+
+----------------------------------------------------------------------------------
+        FUNCION COMO PROP
+
+en el  componente se le pasa una propiedad y donde utilizar la funcion
+
+donde se llama al componente se
+crea una funcion 
+la misma se pasa como propiedad para cambiarle diferentes cosas dependiendo.
+----------------------------------------------------------------------------------
+
+        ELEMENTOS COMO PROP
+
+en el componente se le para una propieda y donde motrarla.
+
+en donde se llama al componente se 
+crea dicho elemento 
+
+----------------------------------------------------------------------------------
+            LAS PROPS SON INMUTABLES.
+
+porque son malas practicas para utilizarlas
+
+se crean contantes y se manipulan.
+
+----------------------------------------------------------------------------------
+
+        LA PROP ESPECIAL CHILDREN
+
+es una prop que toma el contenido de todo lo que contenga el componente ya sea texto 
+elementos u otros componentes.
+----------------------------------------------------------------------------------
+
+        ESTADOS
+
+son la manera en la que esta para conportarse en cierta forma
+
+para utilizarlos de importan los hooks como useState
+
+----------------------------------------------------------------------------------
+
+que son los hooks:
+
+una utilidad para dotar mas los componentes o hacer que actuen de cierta manera 
+en diferentes punto del renderizado
+
+----------------------------------------------------------------------------------
+
+el hook USESTATE sirve para 
+
+guardar una varible que verifique si se esta usando el estado
+
+el useState devuelve un listado con dos posiciones donde la primera es el valor
+del estado y la segunda es un metodo donde el valor que le pasemos se actualizara
+como el nuevo estado. 
+
+tiene que ser una funcion que se ejecute y modifique apartir de eventos.
+
+----------------------------------------------------------------------------------
+
+                USEEFECT
+
+un efecto se ejecuta cada vez que se renderiza un componente,
+en caso de re renderizarlo con un cambio de estado se nota mas
+
+en caso de ponerle una array vacio como dependencia. en su segundo parametro 
+esto funcionaria como un component didt mout(algo parecido. esta mal escrito)
+
+pero es un componente que solo se ejecutara una vez al iniciarse.
+
+----------------------------------------------------------------------------------
+                DOM VIRTUAL.
+
+es un dom que crea react para cada vez que se renderiza ver cuales fueron los nuevos
+cambios y renderizar con las actializaciones minimas.
+
+
+ahi dos maneras de que vuelva a renderizar el dom virtual 
+
+una es cuando el estado interno de un componente cambia react re renderiza dicho componente
+
+otra es cuando un componente padre se re renderiza propaga los cambios a los hijos.
+(aunque no cambios las props ojo con esto)
+
+----------------------------------------------------------------------------------
+
+                CADA COMPONENTE TIENE SU ESTADO INTERNO
+
+el estado de los componentes no se propaga.
+
+
+cuando le pasa una prop para inicializar un estado solo se inicializa una vez.
+
+----------------------------------------------------------------------------------
+
+                RENDERIZADO DE LISTAS   
+
+se puede usar js tan cual como funciones o etc.
+
+usando el map para listas o objetos. 
+ ejemplo
+
+lista.map(i =>{
+//   sacamos toda la informacion del objeto o array.
+        const [a,b,c]=i
+//  lo que devuelve el mapeo del array o objeto es lo que renderizaremos como props
+        return(
+                <TwiterFollowCard
+                            formatUserName={formatUserName}
+                            userName={userName}
+                            img={img}
+                            initialIsFollowing={initialIsFollowing}
+                        >
+                            {userName}
+                        </TwiterFollowCard>
+        )
+})
+
+
+                 RENDERIZAR LISTAR CON APIS
+usando fetch
+
+primero obtenemos la var de la api modificada en partes si
+queremos que sea mas inteligente como cambiarle pa prop del nombre
+a buscar o etc 
+
+despues retornamos el fetch(url de la api) y  con una promesa
+.then(x=>x.json()) transformamos la respuesta en un json 
+.then(res => { 
+        // la var del objeto principal para iterar sobre el
+
+        const {x} = res;
+        // en otra var guardamos la informacion total que 
+        // queremos recuperar del mapeo o recorido del obj 
+        const element = x.map(i =>{
+                const {a,b,c} = i;
+                const { e}=a.url(para acceder a propiedades)
+                const { f}=b.size(para acceder a propiedades)
+        }) 
+
+})
+
+
+ejp:
+
+export default function apiObGifs({ keyword = 'die bart' } = {}) {
+
+    const urlApi = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}=${keyword}&limit=5&offset=0&rating=g&lang=en&bundle=messaging_non_clips`;
+
+
+    return fetch(urlApi)
+        .then(obj => obj.json())
+        .then(response => {
+
+            const { data = [] } = response;
+
+            const gifs = data.map(image => {
+                const { images, title, id } = image;
+                const { url } = images.fixed_height;
+                return { title, id, url };
+            });
+            return gifs;
+
+
+
+        });
+}
+
+
+----------------------------------------------------------------------------------
+
+
+                USAR UNA PROPIEDAD EN EL USEEFECT TIENE LA POTENCIA DE USARLA COMO DEPENDENCIA
+es decir que cada ves que esa propiedad sea cambiada puede volver a renderizar dicho componente
+
+
+export default function ListOnComponent({ keyword }) {
+
+    const [gifs, setGifs] = useState([]);
+
+    useEffect(function () {
+
+        console.log('iniciando fetch');
+
+
+        apiObGifs({ keyword })
+        .then(i =>
+            setGifs(i)
+                );
+    }, [keyword]);
+    
+}
+
+----------------------------------------------------------------------------------
+
+                USANDO WOUTER PARA ENRUTAR LA app
+
+usando el componente route  para añadirle una ruta a cada componente
+y renderizarlo en dicha ruta
+
+y usando el componente ( link  to={} )para decirle a donde lo va a llevar cada hyperenlace
+
+con capacidad de tener parametos dinamicos con el identificador : 
+para crear una ruta y poder cambiarla con solo un param.
+
+
+EJP:
+                <Link to="/gif/color">entrar a color </Link>
+                <Link to="/gif/colombia">entrar a colombia </Link>
+                <Link to="/gif/argentina">entrar a argentina </Link>
+                <Link to="/gif/venezuela">entrar a venezuela </Link>
+                <Route
+                    component={ListOnComponent}
+                    path='/gif/:keyword'
+                />
+
+----------------------------------------------------------------------------------
+
+                        USAR EL USESTATE PARA EFECTO LOADING.
+
+        se crea un usestate(boolean)
+        y se activa en un inicio de un useEffect y al terminar dichas operaciones
+        desactivar para poder el otra ocasion reiniciar el ciclo.
+
+
+----------------------------------------------------------------------------------
+
+                GUARDANDO UN OBJETO EN EL STATE DE UN COMPONENTE
+
+para usar el useState
+se da al estado el valor del objeto con las posiciones requeridar par mostrar.
+
+y el en useEffect (si tiene si no se puede usar el cualquier otra operacion.)
+se da inicio a las variables si son booleanos o si no y
+se da referencia delas posiciones de donde se saca del estado osea
+#nombreEstado.#nombreAceso
+
+y al terminar el proceso se debe devolver las dos variables,cada posicion
+debe devolver su valor corespondiente.
+
+pero para que no alla problema con las dependencias es mejor hacer una funcion
+que devuelva lo neceracio,en la posicion que se requiera
+
+
+ejp:
+export default function ListOnComponent({ params }) {
+
+    const { keyword } = params;
+
+
+    const [gifs, setGifs] = useState(
+        { loading: false, result: [] }
+    );
+
+    useEffect(function () {
+
+        setGifs(actualGifs => ({ loading: true, result: actualGifs.result }));
+
+        apiObGifs({ keyword })
+
+            .then(i => {
+                setGifs({ loading: false, result: i });
+
+            });
+    }, [keyword]);
+}
+

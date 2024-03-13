@@ -1,0 +1,6 @@
+importa react dom 
+
+se añade un create root y se 
+
+busca una id para añadirle componentes o un componente que contenga la app
+

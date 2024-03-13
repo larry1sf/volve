@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap');
+
+body {
+    background: #815E5B;
+}
+
+$fondo-total: #27187E;
+$fondo-segundario: #758BFD;
+
+.zoneOffers {
+    min-width: 100vw;
+    height: 39px;
+    background-color: $fondo-total;
+
+    a {
+        display: flex;
+        place-content: center;
+        height: 100%;
+        color: #fff;
+        font-family: "Londrina Solid";
+        font-weight: 300;
+        font-style: Light;
+        transition: all .3s ease-out;
+
+        p {
+            display: flex;
+            align-items: center;
+            font-size: 26px;
+        }
+
+        div {
+            display: flex;
+            align-items: center;
+            width: 60px;
+            justify-content: end;
+
+            .line-row {
+                background-color: #fff;
+                width: 30px;
+                height: 3px;
+                border-radius: 16px;
+                transition: all .3s ease-in-out;
+
+                &:nth-child(1) {
+                    width: 20px;
+                    position: relative;
+                    top: -.06px;
+                    left: 10px;
+                }
+
+                &:nth-child(2) {
+                    position: relative;
+                    rotate: 40deg;
+                    top: -4px;
+                    width: 14.4px;
+                }
+
+                &:nth-child(3) {
+                    position: relative;
+                    rotate: -40deg;
+                    top: 4px;
+                    left: -15px;
+                    width: 14.009px;
+                }
+            }
+        }
+
+        &:hover {
+            .line-row {
+                &:nth-child(1) {
+                    width: 30px;
+                }
+
+            }
+
+            background-color: $fondo-segundario;
+        }
+    }
+}
